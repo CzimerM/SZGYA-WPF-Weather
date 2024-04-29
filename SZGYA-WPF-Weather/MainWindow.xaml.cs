@@ -29,7 +29,23 @@ namespace SZGYA_WPF_Weather
 
         private void btnAddCityClick(object sender, RoutedEventArgs e)
         {
+            cities.Add(new City() { Name = txbCityName.Text, Humidity = float.Parse(txbHumidity.Text), Windspeed = float.Parse(txbWindSpeed.Text), Temperature = float.Parse(txbTemp.Text)});
+            lstbxCityWeatherData.Items.Refresh();
+        }
+
+        private void btnDeleteClick(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            cities.Remove((City)b.DataContext);
+            lstbxCityWeatherData.Items.Refresh();
+        }
+
+        private void lstbxCityWeatherDataSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
 
         }
+
+
     }
 }

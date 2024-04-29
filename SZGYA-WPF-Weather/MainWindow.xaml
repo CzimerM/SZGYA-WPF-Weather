@@ -17,19 +17,19 @@
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Label>Város neve:</Label>
-            <TextBox Width="150px"></TextBox>
+            <TextBox x:Name="txbCityName" Width="150px"></TextBox>
             <Label>Hőmérséklet:</Label>
-            <TextBox Width="50px"></TextBox>
+            <TextBox x:Name="txbTemp" Width="50px"></TextBox>
             <Label>°C</Label>
             <Label>Páratartalom:</Label>
-            <TextBox Width="50px"></TextBox>
+            <TextBox x:Name="txbHumidity" Width="50px"></TextBox>
             <Label>%</Label>
             <Label>Szélsebesség:</Label>
-            <TextBox Width="50px"></TextBox>
+            <TextBox x:Name="txbWindSpeed" Width="50px"></TextBox>
             <Label>km/h</Label>
             <Button x:Name="btnAddCity" Click="btnAddCityClick">Hozzáadás</Button>
         </StackPanel>
-        <ListBox Visibility="Visible" x:Name="lstbxCityWeatherData" Margin="10,10">
+        <ListBox Visibility="Visible" x:Name="lstbxCityWeatherData" Margin="10,10" MinHeight="30px" SelectionChanged="lstbxCityWeatherDataSelectionChanged">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -40,7 +40,7 @@
                     <DockPanel HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                             <Label Content="{Binding Name}"/>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Visibility="Hidden" x:Name="hidden">
                                 <Label Content="{Binding Temperature}"/>
                                 <Label>°C</Label>
                                 <Label Content="{Binding Humidity}"/>
@@ -50,7 +50,7 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Right">
-                            <Button >Törlés</Button>
+                            <Button x:Name="btnDelete" Click="btnDeleteClick">Törlés</Button>
                         </StackPanel>
                     </DockPanel>
                 </DataTemplate>
