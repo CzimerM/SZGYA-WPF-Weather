@@ -42,7 +42,7 @@ namespace SZGYA_WPF_Weather
 
         private void lstbxCityWeatherDataSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            ((City)lstbxCityWeatherData.SelectedItem).showExtendedData = true;
 
         }
 

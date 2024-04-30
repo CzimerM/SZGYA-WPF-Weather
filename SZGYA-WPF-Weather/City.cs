@@ -12,5 +12,7 @@ namespace SZGYA_WPF_Weather
         public float Temperature { get; set; }
         public float Humidity { get; set; }
         public float Windspeed { get; set; }
+
+        public bool showExtendedData { get; set; } = false;
     }
 }

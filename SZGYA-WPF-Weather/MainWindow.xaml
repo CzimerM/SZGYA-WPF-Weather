@@ -41,6 +41,18 @@
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                             <Label Content="{Binding Name}"/>
                             <StackPanel Orientation="Horizontal" Visibility="Hidden" x:Name="hidden">
+                                <StackPanel.Resources>
+                                    <Style TargetType="StackPanel">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding showExtendedData}" Value="true">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding showExtendedData}" Value="false">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Resources>
                                 <Label Content="{Binding Temperature}"/>
                                 <Label>°C</Label>
                                 <Label Content="{Binding Humidity}"/>
