@@ -6,16 +6,20 @@
         xmlns:local="clr-namespace:SZGYA_WPF_Weather"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="850">
-    <StackPanel Margin="10,10">
-        <StackPanel.Resources>
+    <Grid Margin="10,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="10,2"/>
             </Style>
             <Style TargetType="Label">
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
-        </StackPanel.Resources>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        </Grid.Resources>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0">
             <Label>Város neve:</Label>
             <TextBox x:Name="txbCityName" Width="150px"></TextBox>
             <Label>Hőmérséklet:</Label>
@@ -29,7 +33,7 @@
             <Label>km/h</Label>
             <Button x:Name="btnAddCity" Click="btnAddCityClick">Hozzáadás</Button>
         </StackPanel>
-        <ListBox Visibility="Visible" x:Name="lstbxCityWeatherData" Margin="10,10" MinHeight="30px" SelectionChanged="lstbxCityWeatherDataSelectionChanged">
+        <ListBox Visibility="Visible" x:Name="lstbxCityWeatherData" Grid.Row="1" Margin="10,10" MinHeight="30px" Height="Auto" SelectionChanged="lstbxCityWeatherDataSelectionChanged">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -40,26 +44,27 @@
                     <DockPanel HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                             <Label Content="{Binding Name}"/>
-                            <StackPanel Orientation="Horizontal" Visibility="Hidden" x:Name="hidden">
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding Visibility}" x:Name="hidden">
                                 <StackPanel.Resources>
-                                    <Style TargetType="StackPanel">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding showExtendedData}" Value="true">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding showExtendedData}" Value="false">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="5,0"></Setter>
+                                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                     </Style>
                                 </StackPanel.Resources>
-                                <Label Content="{Binding Temperature}"/>
-                                <Label>°C</Label>
-                                <Label Content="{Binding Humidity}"/>
-                                <Label>%</Label>
-                                <Label Content="{Binding Windspeed}"/>
-                                <Label>km/h</Label>
+                                <TextBlock Text="{Binding Temperature, StringFormat={}{0}°C, ConverterCulture=hu}"/>
+                                <TextBlock Text="{Binding Humidity, StringFormat={}{0}%, ConverterCulture=hu}"/>
+                                <TextBlock Text="{Binding Windspeed, StringFormat={}{0}km/h, ConverterCulture=hu}"/>
                             </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" x:Name="modifyUI" Visibility="{Binding showModifyUI}">
+                            <ListBox VerticalAlignment="Center">
+                                <ListBoxItem x:Name="cityNameItem">Város neve</ListBoxItem>
+                                <ListBoxItem x:Name="tempItem">Hőmérséklet</ListBoxItem>
+                                <ListBoxItem x:Name="humidityItem">Páratartalom</ListBoxItem>
+                                <ListBoxItem x:Name="windspeedItem">Szélsebesség</ListBoxItem>
+                            </ListBox>
+                            <TextBox Width="50px"></TextBox>
+                            <Button Click="btnModifyCityClick">Mentés</Button>
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Right">
                             <Button x:Name="btnDelete" Click="btnDeleteClick">Törlés</Button>
@@ -68,5 +73,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </StackPanel>
+    </Grid>
 </Window>

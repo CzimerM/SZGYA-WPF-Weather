@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,9 +24,12 @@ namespace SZGYA_WPF_Weather
         {
             InitializeComponent();
             cities = new List<City>();
-            cities.Add(new City() { Name = "Bivalyb*sznád", Humidity = 10f, Windspeed = 20.1f, Temperature = 20f });
+            var sr = new StreamReader("../../../src/cities.txt");
+            _ = sr.ReadLine(); // skip 1st line
+            while (!sr.EndOfStream) cities.Add(new City(sr.ReadLine(), ","));
 
             lstbxCityWeatherData.ItemsSource = cities;
+            lstbxCityWeatherData.SelectedItem = cities.FirstOrDefault();
         }
 
         private void btnAddCityClick(object sender, RoutedEventArgs e)
@@ -42,10 +47,14 @@ namespace SZGYA_WPF_Weather
 
         private void lstbxCityWeatherDataSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ((City)lstbxCityWeatherData.SelectedItem).showExtendedData = true;
-
+            foreach (City c in cities) c.showExtendedData = false;
+            if (lstbxCityWeatherData.SelectedItem != null) ((City)lstbxCityWeatherData.SelectedItem).showExtendedData = true;
+            lstbxCityWeatherData.Items.Refresh();
         }
 
+        private void btnModifyCityClick(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }
