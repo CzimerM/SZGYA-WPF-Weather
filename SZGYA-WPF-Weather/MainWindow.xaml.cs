@@ -54,6 +54,20 @@ namespace SZGYA_WPF_Weather
 
         private void btnModifyCityClick(object sender, RoutedEventArgs e)
         {
+            Button b = (Button)sender;
+            StackPanel sp = b.Parent as StackPanel;
+            ComboBox elementToM;
+            TextBox? data = null;
+            foreach (FrameworkElement element in sp.Children)
+            {
+                if (element.Name == "cmbxElementToModify") elementToM = (ComboBox) element;
+                else if (element.Name == "txbData") data = (TextBox) element;
+            }
+            if (data != null) MessageBox.Show(data.Text);
+        }
+
+        private void btnShowModifyUIClick(object sender, RoutedEventArgs e)
+        {
 
         }
     }

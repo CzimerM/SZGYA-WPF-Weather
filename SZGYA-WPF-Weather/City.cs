@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,10 @@ namespace SZGYA_WPF_Weather
         public float Humidity { get; set; }
         public float Windspeed { get; set; }
 
+        List<string> ModificationOptions;
         public bool showExtendedData { get; set; } = false;
+
+        public Visibility showModifyUI = Visibility.Visible;
 
         public Visibility Visibility
         {
@@ -28,6 +32,8 @@ namespace SZGYA_WPF_Weather
             Temperature = float.Parse(data[1].Replace('.',','));
             Humidity = float.Parse(data[2].Replace('.', ','));
             Windspeed = float.Parse(data[3].Replace('.', ','));
+
+            ModificationOptions = new List<string>() { "asd" };
         }
 
         public City() { }

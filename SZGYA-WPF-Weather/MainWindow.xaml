@@ -57,16 +57,17 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" x:Name="modifyUI" Visibility="{Binding showModifyUI}">
-                            <ListBox VerticalAlignment="Center">
-                                <ListBoxItem x:Name="cityNameItem">Város neve</ListBoxItem>
-                                <ListBoxItem x:Name="tempItem">Hőmérséklet</ListBoxItem>
-                                <ListBoxItem x:Name="humidityItem">Páratartalom</ListBoxItem>
-                                <ListBoxItem x:Name="windspeedItem">Szélsebesség</ListBoxItem>
-                            </ListBox>
-                            <TextBox Width="50px"></TextBox>
+                            <ComboBox x:Name="cmbxElementToModify"
+                              Width="140px"
+                              VerticalAlignment="Center"
+                              ItemsSource="{Binding ModificationOptions}"
+                              SelectedItem="{Binding SelectedOption}">
+                            </ComboBox>
+                            <TextBox Width="50px" x:Name="txbData"></TextBox>
                             <Button Click="btnModifyCityClick">Mentés</Button>
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" DockPanel.Dock="Right">
+                            <Button x:Name="btnShowModifyUI" Click="btnShowModifyUIClick">Módosítás</Button>
                             <Button x:Name="btnDelete" Click="btnDeleteClick">Törlés</Button>
                         </StackPanel>
                     </DockPanel>
