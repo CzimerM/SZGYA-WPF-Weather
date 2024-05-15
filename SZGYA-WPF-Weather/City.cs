@@ -18,7 +18,7 @@ namespace SZGYA_WPF_Weather
         List<string> ModificationOptions;
         public bool showExtendedData { get; set; } = false;
 
-        public Visibility showModifyUI = Visibility.Visible;
+        public Visibility showModifyUI = Visibility.Collapsed;
 
         public Visibility Visibility
         {

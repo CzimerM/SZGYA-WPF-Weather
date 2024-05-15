@@ -56,7 +56,7 @@
                                 <TextBlock Text="{Binding Windspeed, StringFormat={}{0}km/h, ConverterCulture=hu}"/>
                             </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" x:Name="modifyUI" Visibility="{Binding showModifyUI}">
+                        <StackPanel Orientation="Horizontal" x:Name="modifyUI" Visibility="Collapsed">
                             <ComboBox x:Name="cmbxElementToModify"
                               Width="140px"
                               VerticalAlignment="Center"
